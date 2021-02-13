@@ -6,9 +6,32 @@
     --color-calendar-graph-day-L4-bg: #0a4208;
   }
   
+  rect.ContributionCalendar-day[data-level='0'] {
+      fill: var(--color-calendar-graph-day-bg);
+  }
+  
+  rect.ContributionCalendar-day[data-level='1'] {
+      fill: var(--color-calendar-graph-day-L1-bg);
+  }
+  
+  rect.ContributionCalendar-day[data-level='2'] {
+      fill: var(--color-calendar-graph-day-L2-bg);
+  }
+  
+  rect.ContributionCalendar-day[data-level='3'] {
+      fill: var(--color-calendar-graph-day-L3-bg);
+  }
+  
+  rect.ContributionCalendar-day[data-level='4'] {
+      fill: var(--color-calendar-graph-day-L4-bg);
+  }
+  
+  .calendar .width-full > .float-left {
+      display: none;
+  }
+  
   .calendar {
       font-family: Helvetica, arial;
-      border-radius: 3px;
       min-height: 243px;
       text-align: center;
       margin: 0 auto;
@@ -55,6 +78,8 @@
   .contrib-column {
       padding: 15px 0;
       text-align: center;
+      border-left: 1px solid #ddd;
+      border-top: 1px solid #ddd;
       font-size: 11px;
   }
   
@@ -75,6 +100,7 @@
       line-height: 1.3em;
       font-size: 24px;
       display: block;
+      color: #333;
   }
   
   .calendar img.spinner {
@@ -85,10 +111,12 @@
   
   .monospace {
       text-align: center;
+      color: #000;
       font-family: monospace;
   }
   
   .monospace a {
+      color: #1D75AB;
       text-decoration: none;
   }
   
@@ -104,8 +132,10 @@
   .left.text-muted {
       float: left;
       margin-left: 9px;
+      color: #767676;
   }
   .left.text-muted a {
+      color: #4078c0;
       text-decoration: none;
   }
   .left.text-muted a:hover,
@@ -154,5 +184,10 @@
       content: " ";
       border: 5px solid transparent;
       border-top-color: rgba(0,0,0,.85)
+  }
+  
+  text.ContributionCalendar-label {
+      fill: #ccc;
+      font-size: 11px;
   }
   

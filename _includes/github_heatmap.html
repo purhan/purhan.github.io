@@ -3,10 +3,6 @@
     </script>
     <link rel="stylesheet" href="assets/css/github_heatmap.css" />
     <style>
-        .contrib-column {
-            
-        }
-
         .js-calendar-graph {
             /* float: right; */
             /* display: flex; */
@@ -20,6 +16,7 @@
             new GitHubCalendar(".calendar", "purhan", {
                 responsive: true
             });
+            $('.contrib-column').remove();
         </script>
     </div>
 </div>
