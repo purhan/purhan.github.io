@@ -9,6 +9,7 @@ const projects = [
     tags: ['React 18', 'TypeScript', 'Supabase', 'LangChain', 'Gemini', 'pgvector'],
     github: null,
     live: 'https://stocksage.site',
+    preview: '/previews/stocksage.png',
     featured: true,
   },
   {
@@ -18,6 +19,7 @@ const projects = [
     tags: ['C++', 'Networking', 'Distributed Systems'],
     github: 'https://github.com/purhan/netengine',
     live: null,
+    preview: '/previews/netengine.png',
     featured: false,
   },
   {
@@ -27,6 +29,7 @@ const projects = [
     tags: ['Node.js', 'React', 'Socket.IO', 'Redis', 'MongoDB'],
     github: 'https://github.com/purhan/serstat',
     live: null,
+    preview: '/previews/serstat.png',
     featured: false,
   },
   {
@@ -36,6 +39,7 @@ const projects = [
     tags: ['TypeScript', 'Supabase', 'Edge Functions', 'Serverless'],
     github: 'https://github.com/purhan/underleaf',
     live: null,
+    preview: '/previews/underleaf.png',
     featured: false,
   },
   {
@@ -45,6 +49,7 @@ const projects = [
     tags: ['Lua', 'AwesomeWM', 'Linux', 'Shell'],
     github: 'https://github.com/purhan/dotfiles',
     live: null,
+    preview: '/previews/dotfiles.gif',
     featured: false,
   },
 ]
@@ -76,26 +81,33 @@ export default function Projects() {
               key={p.name}
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
-              <div className="project-card__top">
-                <span className="project-card__emoji">{p.emoji}</span>
-                <div className="project-card__links">
-                  {p.github && (
-                    <a href={p.github} target="_blank" rel="noreferrer" className="project-card__link" aria-label="GitHub">
-                      <FiGithub />
-                    </a>
-                  )}
-                  {p.live && (
-                    <a href={p.live} target="_blank" rel="noreferrer" className="project-card__link" aria-label="Live site">
-                      <FiExternalLink />
-                    </a>
-                  )}
-                </div>
+              {/* Preview image */}
+              <div className="project-card__preview">
+                <img src={p.preview} alt={`${p.name} preview`} />
+                {p.featured && <span className="featured-badge">✦ Featured</span>}
               </div>
-              {p.featured && <span className="featured-badge">✦ Featured</span>}
-              <div className="project-card__name">{p.name}</div>
-              <p className="project-card__desc">{p.desc}</p>
-              <div className="project-card__tags">
-                {p.tags.map(t => <span className="tag" key={t}>{t}</span>)}
+
+              <div className="project-card__body">
+                <div className="project-card__top">
+                  <span className="project-card__emoji">{p.emoji}</span>
+                  <div className="project-card__links">
+                    {p.github && (
+                      <a href={p.github} target="_blank" rel="noreferrer" className="project-card__link" aria-label="GitHub">
+                        <FiGithub />
+                      </a>
+                    )}
+                    {p.live && (
+                      <a href={p.live} target="_blank" rel="noreferrer" className="project-card__link" aria-label="Live site">
+                        <FiExternalLink />
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <div className="project-card__name">{p.name}</div>
+                <p className="project-card__desc">{p.desc}</p>
+                <div className="project-card__tags">
+                  {p.tags.map(t => <span className="tag" key={t}>{t}</span>)}
+                </div>
               </div>
             </div>
           ))}

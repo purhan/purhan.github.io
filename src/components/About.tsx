@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react'
 
 const stats = [
   { icon: '🏢', value: 'Google', label: 'Current Employer' },
-  { icon: '📍', value: 'New Delhi', label: 'Location' },
-  { icon: '🎓', value: 'IP University', label: 'B.Tech CS — 8.9 GPA' },
+  { icon: '🎓', value: 'CS Graduate', label: 'Computer Science · 8.9 CGPA' },
   { icon: '⚡', value: '3+ yrs', label: 'Professional Experience' },
+  { icon: '🌐', value: 'Remote', label: 'Open to Remote Roles' },
 ]
 
 export default function About() {

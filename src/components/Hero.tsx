@@ -1,14 +1,19 @@
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 
 export default function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="container hero__grid">
         <div className="hero__content">
-          <div className="hero__badge">
+          <a
+            href="mailto:purhan01@gmail.com"
+            className="hero__badge"
+            id="hero-collab-badge"
+            aria-label="Send an email to collaborate"
+          >
             <span className="hero__badge-dot" />
             Available for Collaboration
-          </div>
+          </a>
 
           <h1 className="hero__name">Purhan Kaushik</h1>
 
@@ -31,12 +36,11 @@ export default function Hero() {
               View My Work
             </a>
             <a
-              href="/Resume.pdf"
-              download
-              id="hero-resume"
+              href="mailto:purhan01@gmail.com"
+              id="hero-contact"
               className="btn btn-outline"
             >
-              <FiDownload /> Download Resume
+              <FiMail /> Get In Touch
             </a>
           </div>
 
