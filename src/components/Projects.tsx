@@ -20,6 +20,7 @@ const projects = [
     github: 'https://github.com/purhan/netengine',
     live: null,
     preview: '/previews/netengine.png',
+    previewClass: 'project-card__preview--white',
     featured: false,
   },
   {
@@ -82,7 +83,7 @@ export default function Projects() {
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               {/* Preview image */}
-              <div className="project-card__preview">
+              <div className={`project-card__preview ${p.previewClass || ''}`}>
                 <img src={p.preview} alt={`${p.name} preview`} />
                 {p.featured && <span className="featured-badge">✦ Featured</span>}
               </div>
