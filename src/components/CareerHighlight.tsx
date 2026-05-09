@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FaReddit } from 'react-icons/fa'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 const googleLogo = "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg";
 const gsocLogo = "https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-icon.svg";
@@ -127,6 +128,7 @@ const ProgressBar = ({ focus }: { focus: number }) => {
 
 export default function CareerHighlight() {
   const ref = useRef<HTMLDivElement>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -141,65 +143,81 @@ export default function CareerHighlight() {
     return () => observer.disconnect()
   }, [])
 
-  const renderNode = (item: any, delay: number) => (
-    <div className="track-node" key={item.id} style={{ transitionDelay: `${delay}s` }}>
-      <div className="track-node-header">
-        <div className="track-node-icon">{item.icon}</div>
-        <span className="track-node-date">{item.date}</span>
+  const renderNode = (item: any, delay: number) => {
+    const isExpanded = expandedId === item.id;
+    return (
+      <div className={`track-node ${isExpanded ? 'expanded' : ''}`} key={item.id} style={{ transitionDelay: `${delay}s` }}>
+        <div 
+          className="track-node-header-clickable" 
+          onClick={() => setExpandedId(isExpanded ? null : item.id)}
+        >
+          <div className="track-node-icon">{item.icon}</div>
+          <div className="track-node-header-text">
+            <h4 className="track-node-title">{item.title}</h4>
+            <span className="track-node-date">{item.date}</span>
+          </div>
+          <button className="track-node-toggle" aria-label="Toggle Details">
+            {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
+          </button>
+        </div>
+        
+        <div className="track-node-content" style={{ display: isExpanded ? 'flex' : 'none' }}>
+          <h5 className="track-node-subtitle">{item.subtitle}</h5>
+          <p className="track-node-desc">{item.description}</p>
+          <div className="track-node-focus">
+            <span className="focus-label">Focus</span>
+            <ProgressBar focus={item.focus} />
+          </div>
+        </div>
       </div>
-      <h4 className="track-node-title">{item.title}</h4>
-      <h5 className="track-node-subtitle">{item.subtitle}</h5>
-      <p className="track-node-desc">{item.description}</p>
-      <div className="track-node-focus">
-        <span className="focus-label">Focus Level</span>
-        <ProgressBar focus={item.focus} />
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <section className="section" id="career-highlights" ref={ref} style={{ background: 'var(--bg-primary)' }}>
-      <div className="container">
+      <div className="container" style={{ maxWidth: '100%' }}>
         <p className="section-label">Summary</p>
         <h2 className="section-title">Career Highlights</h2>
         <p className="section-subtitle">A timeline detailing my path through Early Career and into the Industry.</p>
         
-        <div className="flowchart">
-          
-          <div className="flowchart-era-section">
-            <h3 className="era-title">Early Career & Open Source</h3>
-            <div className="era-timeline">
-              {collegeEra.map((row, index) => (
-                <div className={`flowchart-row ${row.type === 'parallel' ? 'parallel' : ''}`} key={index}>
-                  <div className="flowchart-connector-dot"></div>
-                  {row.type === 'parallel' ? (
-                    <div className="parallel-container">
-                      {row.items?.map((item, i) => renderNode(item, 0.1 + (i * 0.1)))}
-                    </div>
-                  ) : (
-                    <div className="single-container">
-                      {renderNode(row.item, 0.1)}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flowchart-era-section">
-            <h3 className="era-title">Professional Career</h3>
-            <div className="era-timeline">
-              {postCollegeEra.map((row, index) => (
-                <div className="flowchart-row" key={index}>
-                  <div className="flowchart-connector-dot"></div>
-                  <div className="single-container">
-                    {renderNode(row.item, 0.1 + (index * 0.1))}
+        <div className="flowchart-container">
+          <div className="flowchart">
+            
+            <div className="flowchart-era-section">
+              <h3 className="era-title">Early Career & Open Source</h3>
+              <div className="era-timeline">
+                {collegeEra.map((row, index) => (
+                  <div className={`flowchart-row ${row.type === 'parallel' ? 'parallel' : ''}`} key={index}>
+                    <div className="flowchart-connector-dot"></div>
+                    {row.type === 'parallel' ? (
+                      <div className="parallel-container">
+                        {row.items?.map((item, i) => renderNode(item, 0.1 + (i * 0.1)))}
+                      </div>
+                    ) : (
+                      <div className="single-container">
+                        {renderNode(row.item, 0.1)}
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
+            <div className="flowchart-era-section">
+              <h3 className="era-title">Professional Career</h3>
+              <div className="era-timeline">
+                {postCollegeEra.map((row, index) => (
+                  <div className="flowchart-row" key={index}>
+                    <div className="flowchart-connector-dot"></div>
+                    <div className="single-container">
+                      {renderNode(row.item, 0.1 + (index * 0.1))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>

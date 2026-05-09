@@ -911,20 +911,20 @@ img { max-width: 100%; display: block; }
 }
 
 /* ===== CAREER HIGHLIGHTS (FLOWCHART) ===== */
+.flowchart-container {
+  width: 100%;
+  overflow: hidden;
+}
 .flowchart {
   display: flex;
   flex-direction: row;
-  gap: 64px;
-  padding: 48px 24px;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+  padding: 48px 0;
   position: relative;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  align-items: center;
+  align-items: stretch;
 }
-.flowchart::-webkit-scrollbar { display: none; }
-
 .flowchart::before {
   content: '';
   position: absolute;
@@ -939,16 +939,18 @@ img { max-width: 100%; display: block; }
 .flowchart-era-section {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 48px;
+  align-items: stretch;
+  gap: 16px;
   position: relative;
   z-index: 1;
 }
 .era-title {
   text-align: center;
   background: var(--bg-primary);
-  display: inline-block;
-  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
   border: 2px solid var(--accent);
   border-radius: 100px;
   color: var(--accent);
@@ -959,39 +961,42 @@ img { max-width: 100%; display: block; }
   z-index: 2;
   white-space: nowrap;
   flex-shrink: 0;
+  font-size: 0.75rem;
 }
 .era-timeline {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 48px;
+  align-items: stretch;
+  gap: 16px;
 }
 .flowchart-row {
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  width: 320px;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 120px;
 }
 .flowchart-row.parallel {
-  width: 680px;
+  flex: 2.5;
 }
 .flowchart-connector-dot {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   background: var(--accent);
-  border: 4px solid var(--bg-primary);
+  border: 3px solid var(--bg-primary);
   border-radius: 50%;
   z-index: 2;
 }
 .single-container {
   width: 100%;
   margin-bottom: calc(50% + 16px);
+  display: flex;
+  flex-direction: column;
 }
 .flowchart-row:nth-child(even) .single-container {
   margin-top: calc(50% + 16px);
@@ -1001,28 +1006,31 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 48px 32px;
+  gap: 32px 16px;
   width: 100%;
-}
-.parallel-container .track-node {
-  flex: 1;
 }
 
 .track-node {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
   position: relative;
   z-index: 2;
   height: 100%;
+  min-width: 0;
+}
+.track-node.expanded {
+  min-width: 260px;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  z-index: 5;
 }
 .track-node.visible {
   opacity: 1;
@@ -1030,16 +1038,16 @@ img { max-width: 100%; display: block; }
 }
 .track-node:hover {
   border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
 }
-.track-node-header {
+.track-node-header-clickable {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  cursor: pointer;
 }
 .track-node-icon {
-  width: 40px; height: 40px;
+  width: 32px; height: 32px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--bg-tertiary);
   display: flex;
@@ -1047,49 +1055,71 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   overflow: hidden;
 }
-.track-node-date {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--bg-tertiary);
-  padding: 4px 8px;
-  border-radius: 100px;
+.track-node-header-text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 8px;
+  min-width: 0;
 }
 .track-node-title {
-  font-size: 1.1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.track-node-date {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.track-node-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+.track-node-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  gap: 8px;
+  animation: fadeUp 0.3s ease;
 }
 .track-node-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--accent);
 }
 .track-node-desc {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  flex-grow: 1;
+  line-height: 1.5;
 }
 .track-node-focus {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 8px;
-  padding-top: 12px;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 8px;
   border-top: 1px solid var(--border);
 }
 .focus-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  white-space: nowrap;
 }
 .focus-progress-container {
   flex-grow: 1;
-  height: 6px;
+  height: 4px;
   background: var(--bg-tertiary);
   border-radius: 100px;
   overflow: hidden;
@@ -1118,6 +1148,9 @@ img { max-width: 100%; display: block; }
 [data-theme='dark'] .logo-dark-mode { display: block; }
 
 @media (max-width: 900px) {
+  .flowchart-container {
+    overflow: visible;
+  }
   .flowchart {
     flex-direction: column;
     align-items: center;
@@ -1133,17 +1166,20 @@ img { max-width: 100%; display: block; }
   }
   .flowchart-era-section {
     flex-direction: column;
+    align-items: flex-start;
+  }
+  .era-title {
+    margin-left: 0;
   }
   .era-timeline {
     flex-direction: column;
   }
   .flowchart-row {
     width: 100%;
-    max-width: 380px;
+    max-width: 100%;
   }
   .flowchart-row.parallel {
     width: 100%;
-    max-width: 380px;
   }
   .flowchart-connector-dot {
     left: 16px;
@@ -1162,5 +1198,9 @@ img { max-width: 100%; display: block; }
     grid-template-columns: 1fr;
     margin-left: 48px;
     width: calc(100% - 48px);
+  }
+  .track-node.expanded {
+    min-width: 0;
+    width: 100%;
   }
 }
