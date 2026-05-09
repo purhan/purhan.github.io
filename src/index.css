@@ -910,6 +910,10 @@ img { max-width: 100%; display: block; }
   color: white;
 }
 
+#career-highlights {
+  padding-bottom: 40px;
+}
+
 /* ===== CAREER HIGHLIGHTS (VERTICAL TIMELINE) ===== */
 .timeline-wrapper {
   position: relative;
@@ -925,12 +929,15 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-bottom: 64px;
+  padding-bottom: 16px;
 }
 .timeline-era {
   display: flex;
   flex-direction: column;
   margin-bottom: 48px;
+}
+.timeline-era:last-child {
+  margin-bottom: 0;
 }
 .era-badge-container {
   display: flex;
@@ -957,6 +964,9 @@ img { max-width: 100%; display: block; }
   width: 100%;
   min-height: 120px;
   margin-bottom: 32px;
+}
+.timeline-row:last-child {
+  margin-bottom: 0;
 }
 .timeline-spine-line {
   position: absolute;
@@ -1205,6 +1215,9 @@ img { max-width: 100%; display: block; }
   .timeline-row {
     flex-direction: column;
     margin-bottom: 48px;
+  }
+  .timeline-row:last-child {
+    margin-bottom: 0;
   }
   .timeline-spine-line {
     left: 24px;
