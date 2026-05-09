@@ -910,23 +910,17 @@ img { max-width: 100%; display: block; }
   color: white;
 }
 
-/* ===== CAREER HIGHLIGHTS (FLOWCHART) ===== */
-.flowchart-container {
+/* ===== CAREER HIGHLIGHTS (ALTERNATING FLOWCHART) ===== */
+.flowchart-wrapper {
+  position: relative;
   width: 100%;
-  overflow: hidden;
-}
-.flowchart {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: center;
+  padding: 80px 0;
   gap: 16px;
-  padding: 48px 0;
-  position: relative;
-  align-items: stretch;
 }
-.flowchart::before {
-  content: '';
+.flowchart-spine {
   position: absolute;
   top: 50%;
   left: 0;
@@ -936,101 +930,94 @@ img { max-width: 100%; display: block; }
   background: var(--border);
   z-index: 0;
 }
-.flowchart-era-section {
+.flowchart-era {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 16px;
+  flex-direction: column;
   position: relative;
-  z-index: 1;
+  flex: 1;
 }
-.era-title {
-  text-align: center;
-  background: var(--bg-primary);
+.era-floating-title-container {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 6px 12px;
+}
+.era-floating-title {
+  background: var(--bg-primary);
+  padding: 6px 16px;
   border: 2px solid var(--accent);
   border-radius: 100px;
   color: var(--accent);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  position: relative;
-  z-index: 2;
-  white-space: nowrap;
-  flex-shrink: 0;
   font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 2;
 }
-.era-timeline {
+.flowchart-era-columns {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  height: 700px; /* fixed height to allow vertical alignment */
+  width: 100%;
   gap: 16px;
 }
-.flowchart-row {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.flowchart-column {
   position: relative;
   flex: 1;
-  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
-.flowchart-row.parallel {
-  flex: 2.5;
+.flowchart-column-parallel {
+  flex: 1.2; /* slightly wider to fit parallel stack beautifully */
 }
-.flowchart-connector-dot {
+.spine-dot {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   background: var(--accent);
   border: 3px solid var(--bg-primary);
   border-radius: 50%;
   z-index: 2;
 }
-.single-container {
+.column-top {
+  height: 50%;
   width: 100%;
-  margin-bottom: calc(50% + 16px);
   display: flex;
   flex-direction: column;
+  justify-content: flex-end; /* Align to bottom, near spine */
+  padding-bottom: 32px;
+  gap: 16px;
 }
-.flowchart-row:nth-child(even) .single-container {
-  margin-top: calc(50% + 16px);
-  margin-bottom: 0;
-}
-.parallel-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 32px 16px;
+.column-bottom {
+  height: 50%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align to top, near spine */
+  padding-top: 32px;
+  gap: 16px;
 }
-
 .track-node {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
   position: relative;
   z-index: 2;
-  height: 100%;
-  min-width: 0;
-}
-.track-node.expanded {
-  min-width: 260px;
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  z-index: 5;
+  width: 100%;
 }
 .track-node.visible {
   opacity: 1;
@@ -1038,15 +1025,39 @@ img { max-width: 100%; display: block; }
 }
 .track-node:hover {
   border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
-.track-node-header-clickable {
+
+/* Connecting Lines */
+.track-node-connector {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: var(--border);
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+.track-node-top .track-node-connector {
+  top: 100%;
+  bottom: -32px; /* Extends down to spine */
+}
+.track-node-bottom .track-node-connector {
+  bottom: 100%;
+  top: -32px; /* Extends up to spine */
+}
+.track-node:hover .track-node-connector {
+  background: var(--accent);
+}
+
+/* Node Contents */
+.track-node-header {
   display: flex;
   align-items: center;
   width: 100%;
-  cursor: pointer;
 }
 .track-node-icon {
-  width: 32px; height: 32px;
+  width: 36px; height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--bg-tertiary);
@@ -1059,7 +1070,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-left: 8px;
+  margin-left: 12px;
   min-width: 0;
 }
 .track-node-title {
@@ -1076,26 +1087,15 @@ img { max-width: 100%; display: block; }
   color: var(--text-muted);
   white-space: nowrap;
 }
-.track-node-toggle {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-}
 .track-node-content {
   display: flex;
   flex-direction: column;
   margin-top: 12px;
   gap: 8px;
-  animation: fadeUp 0.3s ease;
 }
 .track-node-subtitle {
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent);
 }
 .track-node-desc {
@@ -1106,9 +1106,9 @@ img { max-width: 100%; display: block; }
 .track-node-focus {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  padding-top: 8px;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 12px;
   border-top: 1px solid var(--border);
 }
 .focus-label {
@@ -1148,15 +1148,13 @@ img { max-width: 100%; display: block; }
 [data-theme='dark'] .logo-dark-mode { display: block; }
 
 @media (max-width: 900px) {
-  .flowchart-container {
-    overflow: visible;
-  }
-  .flowchart {
+  .flowchart-wrapper {
     flex-direction: column;
-    align-items: center;
+    padding: 0;
+    gap: 0;
   }
-  .flowchart::before {
-    left: 16px;
+  .flowchart-spine {
+    left: 24px;
     right: auto;
     top: 0;
     bottom: 0;
@@ -1164,43 +1162,40 @@ img { max-width: 100%; display: block; }
     height: 100%;
     transform: none;
   }
-  .flowchart-era-section {
+  .flowchart-era {
+    margin-top: 48px;
+  }
+  .era-floating-title-container {
+    position: relative;
+    top: 0;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+    padding-left: 48px;
+  }
+  .flowchart-era-columns {
     flex-direction: column;
-    align-items: flex-start;
+    height: auto;
+    gap: 0;
   }
-  .era-title {
-    margin-left: 0;
-  }
-  .era-timeline {
+  .flowchart-column {
     flex-direction: column;
+    padding-left: 48px;
+    margin-bottom: 24px;
   }
-  .flowchart-row {
-    width: 100%;
-    max-width: 100%;
-  }
-  .flowchart-row.parallel {
-    width: 100%;
-  }
-  .flowchart-connector-dot {
-    left: 16px;
-    top: 50%;
+  .spine-dot {
+    left: 24px;
+    top: 24px;
     transform: translate(-50%, -50%);
   }
-  .single-container {
-    margin-bottom: 0;
-    margin-left: 48px;
-    width: calc(100% - 48px);
+  .column-top, .column-bottom {
+    height: auto;
+    padding: 0;
+    justify-content: flex-start;
   }
-  .flowchart-row:nth-child(even) .single-container {
-    margin-top: 0;
+  .column-bottom {
+    margin-top: 16px;
   }
-  .parallel-container {
-    grid-template-columns: 1fr;
-    margin-left: 48px;
-    width: calc(100% - 48px);
-  }
-  .track-node.expanded {
-    min-width: 0;
-    width: 100%;
+  .track-node-connector {
+    display: none;
   }
 }
