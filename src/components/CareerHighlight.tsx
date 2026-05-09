@@ -10,7 +10,7 @@ const stocksage = {
   title: "StockSage AI",
   subtitle: "AI Agents Challenge",
   description: "I architected an AI-powered stock intelligence platform leveraging LLMs and RAG, featuring dynamic portfolio exit strategies.",
-  icon: <span style={{fontSize: '1.2rem'}}>🤖</span>,
+  icon: <span style={{ fontSize: '1.2rem' }}>🤖</span>,
   focus: 2,
   date: "2026",
 };
@@ -20,7 +20,7 @@ const googleFteWorkspace = {
   title: "Google Workspace",
   subtitle: "Workspace Team",
   description: "I'm currently building high-scale distributed systems, and architected telemetry frameworks and led DMA compliance for Spanner.",
-  icon: <img src={googleLogo} alt="Google" style={{width: 20, height: 20}} />,
+  icon: <img src={googleLogo} alt="Google" style={{ width: 20, height: 20 }} />,
   focus: 5,
   date: "Aug 2024 - Present",
 };
@@ -29,8 +29,8 @@ const googleFteSearch = {
   id: "google-fte-search",
   title: "Google FTE",
   subtitle: "Search Platforms",
-  description: "I built foundational developer tooling and data compliance infrastructure to reduce incident detection latency.",
-  icon: <img src={googleLogo} alt="Google" style={{width: 20, height: 20}} />,
+  description: "I built foundational developer tooling and infrastructure to reduce incident detection latency.",
+  icon: <img src={googleLogo} alt="Google" style={{ width: 20, height: 20 }} />,
   focus: 5,
   date: "Aug 2023 - Aug 2024",
 };
@@ -40,7 +40,7 @@ const googleIntern = {
   title: "Google Intern",
   subtitle: "Knowledge Graph Team",
   description: "I built OLAP-based analytics tools to evaluate Knowledge Graph schema changes, saving 170+ engineering hours per quarter.",
-  icon: <img src={googleLogo} alt="Google" style={{width: 20, height: 20}} />,
+  icon: <img src={googleLogo} alt="Google" style={{ width: 20, height: 20 }} />,
   focus: 5,
   date: "Jan 2023 - Jul 2023",
 };
@@ -50,7 +50,7 @@ const hackdefine = {
   title: "Hackdefine Winner",
   subtitle: "Filecoin Track",
   description: "I won the Hackdefine Filecoin track by building the Hir3 project, a decentralized application.",
-  icon: <span style={{fontSize: '1.2rem'}}>🥇</span>,
+  icon: <span style={{ fontSize: '1.2rem' }}>🥇</span>,
   focus: 4,
   date: "2022",
 };
@@ -75,7 +75,7 @@ const gsoc = {
   title: "Google Summer of Code",
   subtitle: "Netengine Work",
   description: "I built and deployed a Python-based SNMP service to support proprietary firmware devices under GSoC 2021.",
-  icon: <img src={gsocLogo} alt="GSoC" style={{width: 24, height: 24}} />,
+  icon: <img src={gsocLogo} alt="GSoC" style={{ width: 24, height: 24 }} />,
   focus: 5,
   date: "May 2021 - Aug 2021",
 };
@@ -85,7 +85,7 @@ const unixporn = {
   title: "r/unixporn Viral Setup",
   subtitle: "Dotfiles Configuration",
   description: "I designed a customized, keyboard-driven Linux workflow. My dotfiles went viral, earning hundreds of stars.",
-  icon: <FaReddit color="#ff4500" style={{fontSize: '1.4rem'}} />,
+  icon: <FaReddit color="#ff4500" style={{ fontSize: '1.4rem' }} />,
   focus: 5,
   date: "2021",
 };
@@ -95,7 +95,7 @@ const cp = {
   title: "Competitive Programming",
   subtitle: "Codeforces & Codechef",
   description: "I competed intensely in algorithms, reaching Expert on Codeforces and 5-stars on Codechef (Top 1%).",
-  icon: <span style={{fontSize: '1.2rem'}}>🏆</span>,
+  icon: <span style={{ fontSize: '1.2rem' }}>🏆</span>,
   focus: 3,
   date: "2021 - 2022",
 };
@@ -176,7 +176,7 @@ export default function CareerHighlight() {
         <p className="section-label">Summary</p>
         <h2 className="section-title">Career Highlights</h2>
         <p className="section-subtitle" style={{ marginBottom: '48px' }}>A timeline detailing my path from early open-source days to the industry.</p>
-        
+
         <div className={`timeline-wrapper ${isExpanded ? 'expanded' : ''}`}>
           <div className="vertical-timeline">
             {eras.map((era, eraIdx) => (
@@ -184,7 +184,7 @@ export default function CareerHighlight() {
                 <div className="era-badge-container">
                   <h3 className="era-badge">{era.title}</h3>
                 </div>
-                
+
                 {era.rows.map((row, rowIdx) => {
                   const delay = 0.1 + ((eraIdx * 4 + rowIdx) * 0.1);
                   return (
