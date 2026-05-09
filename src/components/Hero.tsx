@@ -1,19 +1,15 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
+import ContactPopover from './ContactPopover'
 
 export default function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="container hero__grid">
         <div className="hero__content">
-          <a
-            href="mailto:purhan01@gmail.com"
-            className="hero__badge"
-            id="hero-collab-badge"
-            aria-label="Send an email to collaborate"
-          >
+          <ContactPopover className="hero__badge" id="hero-collab-badge">
             <span className="hero__badge-dot" />
             Available for Collaboration
-          </a>
+          </ContactPopover>
 
           <h1 className="hero__name">Purhan Kaushik</h1>
 
@@ -35,13 +31,9 @@ export default function Hero() {
             >
               View My Work
             </a>
-            <a
-              href="mailto:purhan01@gmail.com"
-              id="hero-contact"
-              className="btn btn-outline"
-            >
-              <FiMail /> Get In Touch
-            </a>
+            <ContactPopover id="hero-contact" className="btn btn-outline">
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><FiMail /> Get In Touch</span>
+            </ContactPopover>
           </div>
 
           <div className="hero__socials">

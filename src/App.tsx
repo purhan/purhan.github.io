@@ -1,6 +1,7 @@
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import CareerHighlight from './components/CareerHighlight'
 import About from './components/About'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
@@ -16,6 +17,7 @@ export default function App() {
       <Navbar theme={theme} onToggle={toggle} />
       <main>
         <Hero />
+        <CareerHighlight />
         <About />
         <Experience />
         <Projects />

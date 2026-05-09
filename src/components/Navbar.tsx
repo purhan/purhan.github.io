@@ -8,6 +8,7 @@ interface NavbarProps {
 }
 
 const links = [
+  { href: '#career-highlights', label: 'Journey' },
   { href: '#about',        label: 'About' },
   { href: '#experience',   label: 'Experience' },
   { href: '#projects',     label: 'Projects' },

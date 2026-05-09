@@ -1,9 +1,13 @@
 import { useEffect, useRef } from 'react'
 
+const startDate = new Date('2023-01-01');
+const currentDate = new Date();
+const yearsExperience = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+
 const stats = [
   { icon: '🏢', value: 'Google', label: 'Current Employer' },
   { icon: '🎓', value: 'CS Graduate', label: 'Computer Science · 8.9 CGPA' },
-  { icon: '⚡', value: '3+ yrs', label: 'Professional Experience' },
+  { icon: '⚡', value: `over ${yearsExperience} years`, label: 'Professional Experience' },
 ]
 
 export default function About() {
