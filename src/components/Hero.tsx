@@ -6,10 +6,15 @@ export default function Hero() {
     <section className="hero" id="hero">
       <div className="container hero__grid">
         <div className="hero__content">
-          <ContactPopover className="hero__badge" id="hero-collab-badge">
+          <a
+            href="mailto:purhan01@gmail.com"
+            className="hero__badge"
+            id="hero-collab-badge"
+            aria-label="Send an email to collaborate"
+          >
             <span className="hero__badge-dot" />
             Available for Collaboration
-          </ContactPopover>
+          </a>
 
           <h1 className="hero__name">Purhan Kaushik</h1>
 

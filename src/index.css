@@ -836,17 +836,23 @@ img { max-width: 100%; display: block; }
 }
 .popover-close-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: none;
+  top: -10px;
+  right: -10px;
+  background: var(--red);
   border: none;
-  color: var(--red);
+  color: var(--bg-primary);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform var(--transition);
+  box-shadow: var(--shadow-sm);
+  z-index: 1001;
 }
 .popover-close-btn:hover { transform: scale(1.1); }
 .popover-text {
@@ -904,33 +910,88 @@ img { max-width: 100%; display: block; }
   color: white;
 }
 
-/* ===== CAREER HIGHLIGHTS ===== */
-.parallel-tracks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  padding: 24px 0 48px;
-}
-.career-track {
+/* ===== CAREER HIGHLIGHTS (FLOWCHART) ===== */
+.flowchart {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 64px;
+  padding: 48px 0;
+  position: relative;
 }
-.career-track-title {
-  font-size: 1.05rem;
-  font-weight: 700;
+.flowchart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.flowchart-era-section {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+.era-title {
+  text-align: center;
+  background: var(--bg-primary);
+  display: inline-block;
+  padding: 8px 24px;
+  border: 2px solid var(--accent);
+  border-radius: 100px;
   color: var(--accent);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 8px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
-.career-track-items {
+.era-timeline {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 48px;
 }
+.flowchart-row {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+.flowchart-connector-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border: 4px solid var(--bg-primary);
+  border-radius: 50%;
+  z-index: 2;
+}
+.single-container {
+  width: 45%;
+  margin-right: auto;
+}
+.flowchart-row:nth-child(even) .single-container {
+  margin-left: auto;
+  margin-right: 0;
+}
+.parallel-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 32px;
+}
+.parallel-container .track-node {
+  flex: 1;
+}
+
 .track-node {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
@@ -943,6 +1004,8 @@ img { max-width: 100%; display: block; }
   transform: translateY(20px);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 2;
   height: 100%;
 }
 .track-node.visible {
@@ -996,15 +1059,63 @@ img { max-width: 100%; display: block; }
 .track-node-focus {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   margin-top: 8px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
+.focus-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.focus-progress-container {
+  flex-grow: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.focus-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme Logo Wrapper */
+.theme-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.theme-logo-wrapper img {
+  object-fit: contain;
+}
+.logo-light-mode { display: block; }
+.logo-dark-mode { display: none; }
+[data-theme='dark'] .logo-light-mode { display: none; }
+[data-theme='dark'] .logo-dark-mode { display: block; }
 
 @media (max-width: 900px) {
-  .parallel-tracks {
-    grid-template-columns: 1fr;
-    gap: 48px;
+  .flowchart::before {
+    left: 16px;
+  }
+  .flowchart-connector-dot {
+    left: 16px;
+  }
+  .single-container {
+    width: calc(100% - 48px);
+    margin-left: 48px !important;
+    margin-right: 0 !important;
+  }
+  .parallel-container {
+    flex-direction: column;
+    margin-left: 48px;
+    width: calc(100% - 48px);
   }
 }
