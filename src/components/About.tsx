@@ -7,7 +7,7 @@ const yearsExperience = Math.floor((currentDate.getTime() - startDate.getTime())
 const stats = [
   { icon: '🏢', value: 'Google', label: 'Current Employer' },
   { icon: '🎓', value: 'CS Graduate', label: 'Computer Science · 8.9 CGPA' },
-  { icon: '⚡', value: `over ${yearsExperience} years`, label: 'Professional Experience' },
+  { icon: '⚡', value: `Over ${yearsExperience} Years`, label: 'Professional Experience' },
 ]
 
 export default function About() {

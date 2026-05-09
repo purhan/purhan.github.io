@@ -44,8 +44,8 @@ const jobs = [
   {
     company: 'OpenWISP',
     url: 'https://openwisp.org',
-    role: 'Student Developer Intern',
-    period: 'May 2021 – Aug 2021',
+    role: 'Open Source Contributor',
+    period: 'Nov 2020 – Present',
     logo: (
       <div className="theme-logo-wrapper" style={{ width: '24px', height: '24px' }}>
         <img src="/openwisp-logo-black.svg" alt="OpenWISP" className="logo-light-mode" style={{ width: '100%', height: '100%' }} />

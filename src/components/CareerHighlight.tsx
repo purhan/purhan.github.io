@@ -11,7 +11,7 @@ const collegeEra = [
       {
         id: "openwisp",
         title: "OpenWISP",
-        subtitle: "Observability Systems",
+        subtitle: "Open Source Contributor",
         description: "I created observability tools for OpenWISP's router health monitoring system. Optimized system calls, reducing latency by 75%.",
         icon: (
           <div className="theme-logo-wrapper">
@@ -20,7 +20,7 @@ const collegeEra = [
           </div>
         ),
         focus: 5,
-        date: "2021",
+        date: "Nov 2020 - Present",
       },
       {
         id: "gsoc",
@@ -160,14 +160,14 @@ export default function CareerHighlight() {
   return (
     <section className="section" id="career-highlights" ref={ref} style={{ background: 'var(--bg-primary)' }}>
       <div className="container">
-        <p className="section-label">Journey</p>
-        <h2 className="section-title">Career Visualization</h2>
-        <p className="section-subtitle">A flowchart detailing my path through College and into the Industry.</p>
+        <p className="section-label">Summary</p>
+        <h2 className="section-title">Career Highlights</h2>
+        <p className="section-subtitle">A timeline detailing my path through Early Career and into the Industry.</p>
         
         <div className="flowchart">
           
           <div className="flowchart-era-section">
-            <h3 className="era-title">College Era</h3>
+            <h3 className="era-title">Early Career & Open Source</h3>
             <div className="era-timeline">
               {collegeEra.map((row, index) => (
                 <div className={`flowchart-row ${row.type === 'parallel' ? 'parallel' : ''}`} key={index}>
@@ -187,7 +187,7 @@ export default function CareerHighlight() {
           </div>
 
           <div className="flowchart-era-section">
-            <h3 className="era-title">Post-College Era</h3>
+            <h3 className="era-title">Professional Career</h3>
             <div className="era-timeline">
               {postCollegeEra.map((row, index) => (
                 <div className="flowchart-row" key={index}>

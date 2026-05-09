@@ -1,16 +1,32 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import ContactPopover from './ContactPopover'
+import { useState } from 'react'
 
 export default function Hero() {
+  const [showSnackbar, setShowSnackbar] = useState(false)
+
+  const handleCollabClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById('hero-contact')?.click();
+  }
+
+  const handleEmailCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('purhan01@gmail.com');
+    setShowSnackbar(true);
+    setTimeout(() => setShowSnackbar(false), 3000);
+  }
+
   return (
     <section className="hero" id="hero">
       <div className="container hero__grid">
         <div className="hero__content">
           <a
-            href="mailto:purhan01@gmail.com"
+            href="#hero-contact"
             className="hero__badge"
             id="hero-collab-badge"
-            aria-label="Send an email to collaborate"
+            aria-label="Trigger get in touch popover"
+            onClick={handleCollabClick}
           >
             <span className="hero__badge-dot" />
             Available for Collaboration
@@ -30,7 +46,7 @@ export default function Hero() {
 
           <div className="hero__cta">
             <a
-              href="#projects"
+              href="#career-highlights"
               id="hero-view-work"
               className="btn btn-primary"
             >
@@ -63,10 +79,11 @@ export default function Hero() {
               <FiLinkedin />
             </a>
             <a
-              href="mailto:purhan01@gmail.com"
+              href="#"
               id="hero-email"
               className="social-link"
-              aria-label="Email"
+              aria-label="Copy Email"
+              onClick={handleEmailCopy}
             >
               <FiMail />
             </a>
@@ -83,6 +100,25 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      
+      {showSnackbar && (
+        <div className="snackbar" style={{
+          position: 'fixed',
+          bottom: '24px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'var(--accent)',
+          color: 'var(--bg-primary)',
+          padding: '12px 24px',
+          borderRadius: '100px',
+          fontWeight: 600,
+          boxShadow: 'var(--shadow-lg)',
+          zIndex: 9999,
+          animation: 'fadeUp 0.3s ease-out'
+        }}>
+          Email copied to clipboard!
+        </div>
+      )}
     </section>
   )
 }
