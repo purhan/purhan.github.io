@@ -1,11 +1,16 @@
 import { useEffect, useRef } from 'react'
 
+const googleLogo = "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg";
+const gsocLogo = "https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-icon.svg";
+const openwispLogo = "https://avatars.githubusercontent.com/u/1019688?s=200&v=4";
+
 const jobs = [
   {
     company: 'Google',
     url: 'https://google.com',
     role: 'Software Engineer — Engineering Productivity & Compliance',
     period: 'Aug 2023 – Present',
+    logo: googleLogo,
     bullets: [
       'Led DMA compliance & regionalization for Spanner-backed services, ensuring PII isolation across regions and reducing regulatory risk for multi-billion dollar EU workloads.',
       'Architected distributed telemetry & logging framework (stream aggregation + real-time monitoring) that improved incident detection latency by 70% and reduced production incidents by 90%.',
@@ -20,18 +25,30 @@ const jobs = [
     url: 'https://google.com',
     role: 'Software Engineer Intern — Knowledge Graph',
     period: 'Jan 2023 – Jul 2023',
+    logo: googleLogo,
     bullets: [
       'Built OLAP-based analytics tools to evaluate Knowledge Graph schema changes, preventing high-risk modifications and improving schema reliability.',
       'Automated analysis pipelines, saving 170+ engineering hours per quarter and improving decision turnaround time by 35%.',
     ],
   },
   {
-    company: 'OpenWISP — Google Summer of Code',
+    company: 'Google Summer of Code',
+    url: 'https://summerofcode.withgoogle.com',
+    role: 'Student Developer — Netengine',
+    period: 'May 2021 – Aug 2021',
+    logo: gsocLogo,
+    bullets: [
+      'Designed and deployed a Python-based SNMP service to support proprietary firmware devices under the GSoC program.',
+      'Focused on the Netengine module to expand monitoring coverage for network operators.',
+    ],
+  },
+  {
+    company: 'OpenWISP',
     url: 'https://openwisp.org',
     role: 'Student Developer Intern',
     period: 'May 2021 – Aug 2021',
+    logo: openwispLogo,
     bullets: [
-      'Designed and deployed a Python-based SNMP service to support proprietary firmware devices, expanding monitoring coverage for network operators.',
       'Optimized system calls using Retrieval Trees, reducing latency by 75% and improving real-time observability.',
       'Developed a comprehensive testing suite (70+ unit tests, 99% coverage) and automated InfluxDB pipelines for time-series monitoring.',
     ],
@@ -62,7 +79,8 @@ export default function Experience() {
           {jobs.map((job, i) => (
             <div className="timeline-item fade-up" key={i} style={{ transitionDelay: `${i * 0.15}s` }}>
               <div className="timeline-item__header">
-                <div className="timeline-item__company">
+                <div className="timeline-item__company" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {job.logo && <img src={job.logo} alt={job.company} style={{ width: '24px', height: '24px', borderRadius: '4px' }} />}
                   <a href={job.url} target="_blank" rel="noreferrer">{job.company}</a>
                 </div>
                 <span className="timeline-item__period">{job.period}</span>

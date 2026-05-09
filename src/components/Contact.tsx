@@ -1,10 +1,9 @@
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 
 const links = [
   { icon: <FiGithub />,   label: 'GitHub',   href: 'https://github.com/purhan',              id: 'contact-github'   },
   { icon: <FiLinkedin />, label: 'LinkedIn',  href: 'https://www.linkedin.com/in/purhan',     id: 'contact-linkedin' },
   { icon: <FiMail />,     label: 'Email',     href: 'mailto:purhan01@gmail.com',               id: 'contact-email'    },
-  { icon: <FiDownload />, label: 'Resume',    href: '/Resume.pdf',                             id: 'contact-resume', download: true },
 ]
 
 export default function Contact() {
@@ -26,9 +25,8 @@ export default function Contact() {
                   id={l.id}
                   href={l.href}
                   className="contact-link"
-                  target={l.download ? undefined : '_blank'}
-                  rel={l.download ? undefined : 'noreferrer'}
-                  download={l.download || undefined}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   {l.icon}
                   {l.label}
