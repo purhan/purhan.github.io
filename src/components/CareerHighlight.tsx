@@ -213,6 +213,7 @@ export default function CareerHighlight() {
           )}
         </div>
       </div>
+      <div className="section-divider" style={{ marginTop: '48px', marginBottom: '-20px' }}></div>
     </section>
   )
 }
